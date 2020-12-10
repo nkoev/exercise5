@@ -11,7 +11,9 @@ sap.ui.define([
 		 * @memberOf home.kpmg.exercise5.view.UserDetail
 		 */
 		onInit: function () {
-
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.getRoute("UserDetail")
+				.attachPatternMatched(this._onObjectMatched, this);
 		},
 
 		_onObjectMatched: function (oEvent) {
@@ -19,7 +21,7 @@ sap.ui.define([
 				.bindElement({
 					path: "/" + window.decodeURIComponent(oEvent.getParameter(
 							"arguments")
-						.eventPath)
+						.detailId)
 
 				});
 		}

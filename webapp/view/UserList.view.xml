@@ -2,23 +2,35 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="{i18n>masterViewTitle}">
 		<content>
-			<Button text="NavToDetail Test" class="sapUiTinyMarginEnd" press="onNavToDetail"/>
-			<Table noDataText="Drop column list items here and columns in the area above" id="listTable" items="{/userdataSet}"
-				mode="SingleSelectMaster" headerText="{i18n>employeeList}" selectionChange="onNavToDetail">
-				<items>
-					<ColumnListItem id="__item0">
-						<cells>
-							<Text text="{Name}" id="__text0"/>
-						</cells>
-					</ColumnListItem>
-				</items>
+			<Button text="NavToDetail" class="sapUiTinyMarginEnd" press="onNavToDetail"/>
+			<Table noDataText="Drop column list items here and columns in the area above" id="listTable" items="{ path: '/userdataSet' }"
+				headerText="{i18n>userList}">
 				<columns>
 					<Column id="__column0">
 						<header>
 							<Label text="Name" id="__label0"/>
 						</header>
 					</Column>
+					<Column id="__column1">
+						<header>
+							<Label text="Email" id="__label1"/>
+						</header>
+					</Column>
+					<Column id="__column2">
+						<header>
+							<Label text="Mobile" id="__label2"/>
+						</header>
+					</Column>
 				</columns>
+				<items>
+					<ColumnListItem id="__item0" type="Navigation" press="onNavToDetail">
+						<cells>
+							<ObjectIdentifier title="{Name}"/>
+							<ObjectIdentifier title="{Email}"/>
+							<ObjectIdentifier title="{Mobile}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
 			</Table>
 		</content>
 	</Page>

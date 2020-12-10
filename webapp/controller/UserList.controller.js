@@ -10,17 +10,15 @@ sap.ui.define([
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * @memberOf home.kpmg.exercise5.view.UserList
 		 */
-		onInit: function () {
-
-		},
+		onInit: function () {},
 
 		onNavToDetail: function (oEvent) {
-			var oItem = oEvent.getSource().getSelectedItem();
-			var oCtx = oItem.getBindingContext();
-			var oId = oCtx.getProperty("UserId"); //oCtx.getPath() - prepare detailId for URL /detail/{detailId}
-
-			this.getOwnerComponent().getRouter().navTo("detail", {
-				detailId: oId
+			var oItem = oEvent.getSource();
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("UserDetail", {
+				detailId: window.encodeURIComponent(oItem.getBindingContext()
+					.getPath()
+					.substr(1))
 			});
 		}
 

@@ -1,0 +1,78 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPARTY_AGENCY_SRV" xml:lang="en" sap:schema-version="1">
+			<EntityType Name="Files" m:HasStream="true" sap:content-version="1">
+				<Key><PropertyRef Name="Filename"/></Key><Property Name="Filename" Type="Edm.String" Nullable="false" MaxLength="200" sap:unicode="false" sap:label="Text (200 char)"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Sydate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Current Date"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Sytime" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Value" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Binary String" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Mimetype" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Character 100"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Events" sap:content-version="1">
+				<Key><PropertyRef Name="EventId"/></Key><Property Name="EventId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="EventName" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Event" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Location" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="Participants" Relationship="ZPARTY_AGENCY_SRV.EventsParticipants" FromRole="FromRole_EventsParticipants"
+					ToRole="ToRole_EventsParticipants"/></EntityType>
+			<EntityType Name="Participants" sap:content-version="1">
+				<Key><PropertyRef Name="PartId"/></Key><Property Name="EventId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="PartId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="PartFname" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="First name"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PartLname" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Last name" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Vip" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="boolean variable (X=true, space=false)"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="Events" Relationship="ZPARTY_AGENCY_SRV.EventsParticipants" FromRole="ToRole_EventsParticipants"
+					ToRole="FromRole_EventsParticipants"/></EntityType>
+			<EntityType Name="ZC_EventsParticipantsType" sap:label="View for events with participants" sap:content-version="1">
+				<Key><PropertyRef Name="event_id"/></Key><Property Name="event_id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="Global Unique ID for table"/><Property Name="event_name" Type="Edm.String" MaxLength="50" sap:label="Event" sap:quickinfo="Event name"/><Property Name="city" Type="Edm.String" MaxLength="40" sap:label="Location" sap:quickinfo="Event location"/><Property Name="event_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Start Date" sap:quickinfo="Start date"/><NavigationProperty Name="to_Participants" Relationship="ZPARTY_AGENCY_SRV.assoc_ED88C0912AEF2E076816B7AA1638EC6C"
+					FromRole="FromRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C" ToRole="ToRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C"/></EntityType>
+			<EntityType Name="ZC_ParticipantsType" sap:label="Participants consumption view" sap:content-version="1">
+				<Key><PropertyRef Name="Participant"/></Key><Property Name="Participant" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="Global Unique ID for table"/><Property Name="FirstName" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="First name"/><Property Name="LastName" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Last name"/><Property Name="IsVip" Type="Edm.String" MaxLength="1" sap:label="" sap:quickinfo="boolean variable (X=true, space=false)"/><Property Name="Event" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="Global Unique ID for table"/></EntityType>
+			<ComplexType Name="EventsCount"><Property Name="Count" Type="Edm.Int16" Nullable="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false"
+				sap:sortable="false" sap:filterable="false"/></ComplexType>
+			<Association Name="EventsParticipants" sap:content-version="1"><End Type="ZPARTY_AGENCY_SRV.Events" Multiplicity="1" Role="FromRole_EventsParticipants"/><End Type="ZPARTY_AGENCY_SRV.Participants" Multiplicity="*" Role="ToRole_EventsParticipants"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_EventsParticipants"><PropertyRef Name="EventId"/></Principal>
+					<Dependent Role="ToRole_EventsParticipants"><PropertyRef Name="EventId"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_ED88C0912AEF2E076816B7AA1638EC6C" sap:content-version="1"><End Type="ZPARTY_AGENCY_SRV.ZC_EventsParticipantsType" Multiplicity="1" Role="FromRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C"/><End Type="ZPARTY_AGENCY_SRV.ZC_ParticipantsType" Multiplicity="*" Role="ToRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C"/></Association>
+			<EntityContainer Name="ZPARTY_AGENCY_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true"
+				sap:supported-formats="atom json xlsx"><EntitySet Name="ZC_EventsParticipants" EntityType="ZPARTY_AGENCY_SRV.ZC_EventsParticipantsType" sap:content-version="1"/><EntitySet Name="ZC_Participants" EntityType="ZPARTY_AGENCY_SRV.ZC_ParticipantsType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:content-version="1"/><EntitySet Name="FilesSet" EntityType="ZPARTY_AGENCY_SRV.Files" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="EventsSet" EntityType="ZPARTY_AGENCY_SRV.Events" sap:searchable="true" sap:content-version="1"/><EntitySet Name="ParticipantsSet" EntityType="ZPARTY_AGENCY_SRV.Participants" sap:searchable="true" sap:content-version="1"/>
+				<AssociationSet Name="EventsParticipantsSet" Association="ZPARTY_AGENCY_SRV.EventsParticipants" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="EventsSet" Role="FromRole_EventsParticipants"/><End EntitySet="ParticipantsSet" Role="ToRole_EventsParticipants"/></AssociationSet>
+				<AssociationSet Name="assoc_ED88C0912AEF2E076816B7AA1638EC6C" Association="ZPARTY_AGENCY_SRV.assoc_ED88C0912AEF2E076816B7AA1638EC6C"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="ZC_EventsParticipants" Role="FromRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C"/><End EntitySet="ZC_Participants" Role="ToRole_assoc_ED88C0912AEF2E076816B7AA1638EC6C"/></AssociationSet><FunctionImport Name="CountEvents" ReturnType="ZPARTY_AGENCY_SRV.EventsCount" m:HttpMethod="POST" sap:action-for="ZPARTY_AGENCY_SRV.Events"/></EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPARTY_AGENCY_SRV.ZPARTY_AGENCY_SRV_Entities">
+				<Annotation Term="Aggregation.ApplySupported">
+					<Record>
+						<PropertyValue Property="Transformations">
+							<Collection>
+								<String>aggregate</String>
+								<String>groupby</String>
+								<String>filter</String>
+							</Collection>
+						</PropertyValue><PropertyValue Property="Rollup" EnumMember="None"/></Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPARTY_AGENCY_SRV.ZC_EventsParticipantsType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>event_id</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPARTY_AGENCY_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPARTY_AGENCY_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

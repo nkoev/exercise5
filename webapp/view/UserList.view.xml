@@ -2,7 +2,6 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="{i18n>masterViewTitle}">
 		<content>
-			<Button text="NavToDetail" class="sapUiTinyMarginEnd" press="onNavToDetail"/>
 			<Table noDataText="Drop column list items here and columns in the area above" id="listTable" items="{ path: '/userdataSet' }"
 				headerText="{i18n>userList}">
 				<columns>

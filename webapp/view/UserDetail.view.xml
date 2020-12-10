@@ -18,9 +18,9 @@
 			</form:SimpleForm>
 			<Toolbar width="100%" id="__toolbar1">
 				<content>
-					<Button text="{i18n>createButtonText}" id="__button0" icon="sap-icon://create" press="onEmployeeCreate"/>
-					<Button text="{i18n>updateButtonText}" id="__button1" icon="sap-icon://save" press="onEmployeeUpdate"/>
-					<Button text="{i18n>deleteButtonText}" id="__button2" icon="sap-icon://delete" press="onEmployeeDelete"/>
+					<Button text="{i18n>createButtonText}" id="__button0" icon="sap-icon://create" press="onUserCreate"/>
+					<Button text="{i18n>updateButtonText}" id="__button1" icon="sap-icon://save" press="onUserUpdate"/>
+					<Button text="{i18n>deleteButtonText}" id="__button2" icon="sap-icon://delete" press="onUserDelete"/>
 				</content>
 			</Toolbar>
 		</content>

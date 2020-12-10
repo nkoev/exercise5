@@ -1,0 +1,25 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="home.kpmg.exercise5.controller.UserList"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>masterViewTitle}">
+		<content>
+			<Button text="NavToDetail Test" class="sapUiTinyMarginEnd" press="onNavToDetail"/>
+			<Table noDataText="Drop column list items here and columns in the area above" id="listTable" items="{/userdataSet}"
+				mode="SingleSelectMaster" headerText="{i18n>employeeList}" selectionChange="onNavToDetail">
+				<items>
+					<ColumnListItem id="__item0">
+						<cells>
+							<Text text="{Name}" id="__text0"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column id="__column0">
+						<header>
+							<Label text="Name" id="__label0"/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>
